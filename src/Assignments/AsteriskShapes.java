@@ -1,0 +1,44 @@
+/*
+ *Sean Welsh
+ *Assignment 1.2 Asterisk Shapes
+ *utilizes println to print a square diamond and arrow
+ */
+package Assignments;
+
+public class AsteriskShapes {
+	public static void main(String[] args) {
+		//All shapes formatted to print left to right
+		System.out.println("* * * * *\t    *    \t         *");
+		System.out.println("*       *\t  *   *  \t           *");
+		System.out.println("*       *\t*       *\t* * * * * * *");
+		System.out.println("*       *\t  *   *  \t           *");
+		System.out.println("* * * * *\t    *    \t         *");
+		
+		System.out.println("\n\n"); //adding new lines to create space for vertically printed shapes
+		
+		//creating square
+		System.out.println("* * * * *");
+		System.out.println("*       *");
+		System.out.println("*       *");
+		System.out.println("*       *");
+		System.out.println("* * * * *");
+		
+		System.out.println("\n\n"); //adding new lines to create space for next shape
+		
+		//creating diamond
+		System.out.println("    *");
+		System.out.println("  *   *");
+		System.out.println("*       *");
+		System.out.println("  *   *");
+		System.out.println("    *");
+		
+		System.out.println("\n\n"); //adding new lines to create space for next shape
+		
+		//creating arrow
+		System.out.println("         *");
+		System.out.println("           *");
+		System.out.println("* * * * * * *");
+		System.out.println("           *");
+		System.out.println("         *");
+	}//end of main
+}//end of AsteriskShapes
