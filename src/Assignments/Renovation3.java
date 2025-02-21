@@ -191,8 +191,8 @@ public class Renovation3 {
 		
 		
 		//print out project information
-		printProjectInformation(userBudgetWall, totalWallCost, wallType, userWallPreference, "wall");
-		printProjectInformation(userBudgetFloor, totalFlooringCost, floorType, userFloorPreference, "floor");
+		printProjectInformation(userBudgetWall, totalWallCost, wallType, userWallPreference, "wall", totalWallArea);
+		printProjectInformation(userBudgetFloor, totalFlooringCost, floorType, userFloorPreference, "floor", totalFlooringArea);
 		
 		getData.close(); // close scanner to free up resources
 	}//end of main
@@ -225,7 +225,9 @@ public class Renovation3 {
 	}// end of adjustWallFloorAndWallArea
 	
 	//prints out the project information for the wall and floor
-	public static void printProjectInformation(double budget, double totalCost, String material, String preference, String location ) {
+	public static void printProjectInformation(double budget, double totalCost, String material, String preference, String location, double locationArea) {
+		System.out.printf("\n\nfor this project the total %s area to be covered is %.2fft.",location, locationArea);
+		System.out.printf("\nyour budget for %s covers is $%.2f",location, budget);
 		if(budget > totalCost) {
 			//adjust user budget remove the cost of floor from the budget
 			budget -=totalCost;
@@ -241,7 +243,8 @@ public class Renovation3 {
 			System.out.printf("\nCost to use %s = $%.2f", material, totalCost);
 			System.out.printf("\nleftover %s budget $%.2f", location, budget);
 		}else {
-			System.out.printf("\nSorry could not find any %s covering in your budget", location);			
+			System.out.printf("\nSorry could not find any %s covering in your budget", location);
+			System.out.printf("\nleftover %s budget $%.2f", location, budget);
 		}//end if		
 	}//end of printProjectInformation
 }//end of Renovation3

@@ -191,8 +191,8 @@ public class Renovation3 {
 		
 		
 		//print out project information
-		printProjectInformation(userBudgetWall, totalWallCost, wallType, userWallPreference, "wall");
-		printProjectInformation(userBudgetFloor, totalFlooringCost, floorType, userFloorPreference, "floor");
+		printProjectInformation(userBudgetWall, totalWallCost, wallType, userWallPreference, "wall", totalWallArea);
+		printProjectInformation(userBudgetFloor, totalFlooringCost, floorType, userFloorPreference, "floor", totalFlooringArea);
 		
 		getData.close(); // close scanner to free up resources
 	}//end of main
@@ -225,7 +225,9 @@ public class Renovation3 {
 	}// end of adjustWallFloorAndWallArea
 	
 	//prints out the project information for the wall and floor
-	public static void printProjectInformation(double budget, double totalCost, String material, String preference, String location ) {
+	public static void printProjectInformation(double budget, double totalCost, String material, String preference, String location, double locationArea) {
+		System.out.printf("\n\nfor this project the total %s area to be covered is %.2fft.",location, locationArea);
+		System.out.printf("\nyour budget for %s covers is $%.2f",location, budget);
 		if(budget > totalCost) {
 			//adjust user budget remove the cost of floor from the budget
 			budget -=totalCost;
@@ -241,10 +243,12 @@ public class Renovation3 {
 			System.out.printf("\nCost to use %s = $%.2f", material, totalCost);
 			System.out.printf("\nleftover %s budget $%.2f", location, budget);
 		}else {
-			System.out.printf("\nSorry could not find any %s covering in your budget", location);			
+			System.out.printf("\nSorry could not find any %s covering in your budget", location);
+			System.out.printf("\nleftover %s budget $%.2f", location, budget);
 		}//end if		
 	}//end of printProjectInformation
 }//end of Renovation3
+
 
 
 OUTPUT1:
@@ -310,10 +314,16 @@ please enter the cost per square foot for Hardwood: 3
 please enter the cost per square foot for Carpet: 2
 please enter the cost per square foot for Linoleum Tile: 1
 
+
+for this project the total wall area to be covered is 446.00ft.
+your budget for wall covers is $1200.00
 you did not have a preference on wall covering. 
 The best material we have in your budget is wallpaper!
 Cost to use wallpaper = $892.00
 leftover wall budget $308.00
+
+for this project the total floor area to be covered is 128.00ft.
+your budget for floor covers is $255.00
 you did not have a preference on floor covering. 
 The best material we have in your budget is linoleum tile!
 Cost to use linoleum tile = $128.00
@@ -363,7 +373,7 @@ please enter your budget for wall covering: 250
 2 - Paneling
 3 - Wallpaper
 4 - Paint
-please enter a number 0-4 from the following Wall cover option: 1
+please enter a number 0-4 from the following Wall cover option: 4
 
 
 please enter the cost per square foot for Ceramic Tile: 4
@@ -380,7 +390,7 @@ please enter your budget for flooring: 250
 2 - Hardwood
 3 - Carpet
 4 - linoleum tile
-please enter a number 0-4 from the following flooring option: 4
+please enter a number 0-4 from the following flooring option: 1
 
 
 please enter the cost per square foot for Ceramic Tile: 4
@@ -388,8 +398,16 @@ please enter the cost per square foot for Hardwood: 3
 please enter the cost per square foot for Carpet: 2
 please enter the cost per square foot for Linoleum Tile: 1
 
+
+for this project the total wall area to be covered is 443.00ft.
+your budget for wall covers is $250.00
 Sorry could not find any wall covering in your budget
+leftover wall budget $250.00
+
+for this project the total floor area to be covered is 258.00ft.
+your budget for floor covers is $250.00
 Sorry could not find any floor covering in your budget
+leftover floor budget $250.00
 
 
 OUTPUT3:
@@ -455,9 +473,15 @@ please enter the cost per square foot for Hardwood: 3
 please enter the cost per square foot for Carpet: 2
 please enter the cost per square foot for Linoleum Tile: 1
 
+
+for this project the total wall area to be covered is 447.04ft.
+your budget for wall covers is $6000.00
 congratulations your preference of wallpaper is in your budget!!
 Cost to use wallpaper = $894.08
 leftover wall budget $5105.92
+
+for this project the total floor area to be covered is 119.44ft.
+your budget for floor covers is $400.00
 congratulations your preference of Carpet is in your budget!!
 Cost to use Carpet = $238.88
 leftover floor budget $161.13
