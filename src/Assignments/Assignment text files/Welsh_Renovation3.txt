@@ -245,3 +245,219 @@ public class Renovation3 {
 		}//end if		
 	}//end of printProjectInformation
 }//end of Renovation3
+
+
+OUTPUT1:
+please enter the rooms length, width, and height in feet.
+each measurement should be entered in that order and separated by a space: 12 12 12
+
+
+Please enter the number of doors in the room: 3
+
+
+please enter door number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 2 10
+
+
+please enter door number 2's width, and height in feet
+each measurement should be entered in that order and separated by a space: 3 5
+
+
+please enter door number 3's width, and height in feet
+each measurement should be entered in that order and separated by a space: 3 5
+
+
+Please enter the number of windows in the room: 0
+
+
+Please enter the number of bookshelves in the room: 1
+
+
+please enter bookshelf number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 8 10 2
+
+
+please enter your budget for wall covering: 1200
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Paneling
+3 - Wallpaper
+4 - Paint
+please enter a number 0-4 from the following Wall cover option: 0
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Paneling: 3
+please enter the cost per square foot for Wallpaper: 2
+please enter the cost per square foot for paint: 1
+
+
+please enter your budget for flooring: 255
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Hardwood
+3 - Carpet
+4 - linoleum tile
+please enter a number 0-4 from the following flooring option: 0
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Hardwood: 3
+please enter the cost per square foot for Carpet: 2
+please enter the cost per square foot for Linoleum Tile: 1
+
+you did not have a preference on wall covering. 
+The best material we have in your budget is wallpaper!
+Cost to use wallpaper = $892.00
+leftover wall budget $308.00
+you did not have a preference on floor covering. 
+The best material we have in your budget is linoleum tile!
+Cost to use linoleum tile = $128.00
+leftover floor budget $127.00
+
+
+
+OUTPUT2:
+please enter the rooms length, width, and height in feet.
+each measurement should be entered in that order and separated by a space: 24 12 8
+
+
+Please enter the number of doors in the room: 0
+
+
+Please enter the number of windows in the room: 3
+
+
+please enter window number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 2 6
+
+
+please enter window number 2's width, and height in feet
+each measurement should be entered in that order and separated by a space: 3 5
+
+
+please enter window number 3's width, and height in feet
+each measurement should be entered in that order and separated by a space: 8 5
+
+
+Please enter the number of bookshelves in the room: 2
+
+
+please enter bookshelf number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 8 6 3
+
+
+please enter bookshelf number 2's width, and height in feet
+each measurement should be entered in that order and separated by a space: 3 6 2
+
+
+please enter your budget for wall covering: 250
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Paneling
+3 - Wallpaper
+4 - Paint
+please enter a number 0-4 from the following Wall cover option: 1
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Paneling: 3
+please enter the cost per square foot for Wallpaper: 2
+please enter the cost per square foot for paint: 1
+
+
+please enter your budget for flooring: 250
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Hardwood
+3 - Carpet
+4 - linoleum tile
+please enter a number 0-4 from the following flooring option: 4
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Hardwood: 3
+please enter the cost per square foot for Carpet: 2
+please enter the cost per square foot for Linoleum Tile: 1
+
+Sorry could not find any wall covering in your budget
+Sorry could not find any floor covering in your budget
+
+
+OUTPUT3:
+please enter the rooms length, width, and height in feet.
+each measurement should be entered in that order and separated by a space: 12.75 11.25 12
+
+
+Please enter the number of doors in the room: 1
+
+
+please enter door number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 1.95 10
+
+
+Please enter the number of windows in the room: 2
+
+
+please enter window number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 2.5 5
+
+
+please enter window number 2's width, and height in feet
+each measurement should be entered in that order and separated by a space: 6.8 7.2
+
+
+Please enter the number of bookshelves in the room: 1
+
+
+please enter bookshelf number 1's width, and height in feet
+each measurement should be entered in that order and separated by a space: 8 6 3
+
+
+please enter your budget for wall covering: 6000
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Paneling
+3 - Wallpaper
+4 - Paint
+please enter a number 0-4 from the following Wall cover option: 3
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Paneling: 3
+please enter the cost per square foot for Wallpaper: 2
+please enter the cost per square foot for paint: 1
+
+
+please enter your budget for flooring: 400
+
+
+0 - no preference
+1 - Ceramic Tile
+2 - Hardwood
+3 - Carpet
+4 - linoleum tile
+please enter a number 0-4 from the following flooring option: 3
+
+
+please enter the cost per square foot for Ceramic Tile: 4
+please enter the cost per square foot for Hardwood: 3
+please enter the cost per square foot for Carpet: 2
+please enter the cost per square foot for Linoleum Tile: 1
+
+congratulations your preference of wallpaper is in your budget!!
+Cost to use wallpaper = $894.08
+leftover wall budget $5105.92
+congratulations your preference of Carpet is in your budget!!
+Cost to use Carpet = $238.88
+leftover floor budget $161.13
