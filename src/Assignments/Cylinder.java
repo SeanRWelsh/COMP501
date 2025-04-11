@@ -11,8 +11,7 @@ public class Cylinder extends Circle{
 	}//end constructor Cylinder
 	
 	public Cylinder(double height) {
-		//super explicitly calls the default constructor in circle
-		super();
+		// without super an implicit call to the default constructor in circle is made		
 		this.height = height;
 		System.out.println("in constructor for cylinder parameter height= " + height + " read in");
 	}//end constructor Cylinder
