@@ -92,7 +92,7 @@ public class Deck {
 	public Card dealCard() {
 		SecureRandom randomNumberGenerator = new SecureRandom();
 		int randomNumber = randomNumberGenerator.nextInt(52);
-		while (!cards[randomNumber].inDeck()) {
+		while (!cards[randomNumber].isInDeck()) {
 			randomNumber = randomNumberGenerator.nextInt(52);
 		}
 		cards[randomNumber].setInDeck(false);
@@ -111,7 +111,7 @@ public class Deck {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 52; i++) {
 			sb.append(cards[i].toString());
-			sb.append(cards[i].getInDeck());
+			sb.append(cards[i].isInDeck());
 			sb.append("\n");
 		}
 		return sb.toString();
