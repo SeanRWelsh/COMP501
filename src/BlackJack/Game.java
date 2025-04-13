@@ -79,8 +79,11 @@ public class Game {
 				getData.nextLine();
 				continue;
 			}//end try catch
-		
-		player.setHand(deck.dealCard());
+		Card cardDealt=deck.dealCard();
+		if(cardDealt.getName() =="Ace") {
+			setAceValue(getData, cardDealt);			
+		}
+		player.setHand(cardDealt);
 		if(player.getHandTotal() > 21) {
 			player.showHand();
 			System.out.println("which adds up to "+ player.getHandTotal());
@@ -102,6 +105,25 @@ public class Game {
 		}
 		if(dealer.getHandTotal() > 21) dealer.setBusted(true);
 	}
+	private void setAceValue(Scanner getData, Card card) {
+		int value;
+		System.out.println("You were dealt an Ace Would you like its value to be 11 or 1?");
+		while(true) {
+			try {
+				value = getData.nextInt();
+				if(value ==1 || value ==11) {
+					card.setValue(value);
+					break;
+				}else {
+					//System.out.println("Invalid input please try again");
+					throw new InputMismatchException();
+				}
+			}catch(InputMismatchException e) {
+				System.out.println("Invalid input please enter 1 or 11");
+				getData.nextLine();
+			}
+		}
+	}
 	
 	public void announceWinners() {
 		int dealer = players.length-1;
@@ -114,9 +136,10 @@ public class Game {
 			for(int i=0; i<dealer; i++) {
 				if(players[i].isBusted()) {
 					System.out.println(players[i].getName() + " also busted...better luck next time ");
-				}
+				}else {
 				players[i].setWins();
 				System.out.println(players[i].getName() + " Won!!");
+				}
 			}
 		}else {
 			for(int i=0; i<dealer; i++) {
@@ -133,7 +156,7 @@ public class Game {
 					System.out.println(players[i].getName() + " tied with ");
 					players[i].showHand();
 					System.out.println(" dealer had ");
-					players[dealer].showHand();
+					((Dealer)players[dealer]).showFullHand();
 				}else {
 					System.out.println(players[i].getName() + " lost with ");
 					players[i].showHand();
@@ -145,10 +168,17 @@ public class Game {
 		}
 		
 	}//end announce winners
-	public void printDeal() {
+	public void printDeal(Scanner getData) {
 		for(Player player: players) {
+			Card card[] = player.getHand();
 			System.out.println(player.getName());
 			player.showHand();
+			if(player.getName() == "dealer") break;
+			for(int i = 0; i<player.getNumberOfCardsInHand(); i++) {
+				if(card[i].getName() == "Ace") {
+					setAceValue(getData, card[i]);
+				}
+			}
 		}//end for
 	}//end print players hand
 

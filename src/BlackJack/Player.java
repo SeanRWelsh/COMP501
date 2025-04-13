@@ -29,18 +29,9 @@ public class Player {
 		}//end for
 		return numberOfCards;
 		
-	}
+	}//end getNumberOfCardsInHand
+	
 	public void showHand() {
-//		StringBuilder sb = new StringBuilder();
-//		for(int i=0; i<getNumberOfCardsInHand(); i++) {
-//			sb.append(hand[i] );			
-//			if(i+1 != getNumberOfCardsInHand()) {
-//				sb.append(", ");
-//			}else {
-//				sb.append(" ");
-//			}
-//		}//end for
-//		return sb.toString();
 		Card hand[] = getHand();
 		String visualHand[]= {"","","","","","",""};
 		for(int i=0; i<getNumberOfCardsInHand(); i++) {
@@ -109,15 +100,4 @@ public class Player {
 		this.busted = busted;
 		
 	}
-	
-//	@Override
-//	public String toString() {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(name);
-//		sb.append("'s hand is ");
-//		sb.append(showHand());
-//		return sb.toString();
-//	}//end toString
-	
-
 }

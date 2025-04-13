@@ -18,7 +18,7 @@ public class Card {
 		return suit;
 	}
 	
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 	
@@ -40,6 +40,9 @@ public class Card {
 	}
 	public String getSuitSymbol() {
 		return suitSymbol;
+	}
+	public void setValue(int value) {
+		this.value=value;
 	}
 	
 	@Override

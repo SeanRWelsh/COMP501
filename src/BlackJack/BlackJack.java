@@ -1,3 +1,11 @@
+/*
+ *Sean Welsh
+ *Assignment BlackJack 
+ *This Program allows up to 4 players to play blackJack against a dealer
+ *BlackJack class contains Main and drives the program
+ *Game handles all Game logic
+ *Player handles
+ */
 package BlackJack;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -36,7 +44,7 @@ public class BlackJack {
 		playGame = new Game(players);
 		while(playAgain) {
 			playGame.deal();
-			playGame.printDeal();
+			playGame.printDeal(getData);
 			playGame.playRound(getData);
 			playGame.announceWinners();
 			playAgain= playGame.playAgain(getData);
