@@ -6,6 +6,9 @@ public class BlackJack {
 	public static void main(String[] args) {
 		int numberOfPlayers = 0;
 		Scanner getData = new Scanner(System.in);
+		Player players[];
+		Game playGame;
+		boolean playAgain = true;
 		
 		System.out.println("Welcome to blackJack!!");
 		while(true) {
@@ -23,42 +26,29 @@ public class BlackJack {
 				getData.nextLine();
 			}
 		}
-		Player players[] = new Player[numberOfPlayers];
+		players = new Player[numberOfPlayers];
 		for(int i = 0; i<players.length; i++) {
 			String name;
 			System.out.printf("Please enter player %d's name: \n", i+1);
 			name = getData.next();
 			players[i] = new Player(name);
 		}
-		while(true) {
-			String playAgain;
-			Game playGame = new Game(players);
+		playGame = new Game(players);
+		while(playAgain) {
 			playGame.deal();
-			playGame.printPlayersHand();
+			playGame.printDeal();
 			playGame.playRound(getData);
-			//		playGame.announceWinners();
-			while(true) {
-				try {
-					System.out.println("Play again?[Y/N]");
-					playAgain = getData.next();
-					if(playAgain.toLowerCase().equals("n")) {
-						System.out.println("Thanks for playing blackjack come back soon!");
-						getData.close();
-						System.exit(1);
-					}else if(!playAgain.toLowerCase().equals("y")) {
-						throw new InputMismatchException();
-					}//end if else
-				}catch(InputMismatchException e) {
-					System.out.println("Invalid input please enter y to play another round n to leave");
-					getData.nextLine();
-					continue;
-				}//end try catch
-				playGame.nextRound();
-				break;
-				
-			}//end input while
-		
+			playGame.announceWinners();
+			playAgain= playGame.playAgain(getData);
 		}// end while
+		
+		System.out.println("Final win tally");
+		for(int i = 0; i<players.length; i++) {
+			System.out.println(players[i].getName() + " Won a total of " + 
+		players[i].getWins());
+		}
+		
+		System.out.println("Thanks for Playing blackjack!");
 
 
 		

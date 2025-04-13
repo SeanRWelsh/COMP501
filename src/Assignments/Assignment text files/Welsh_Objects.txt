@@ -4,12 +4,13 @@ public class Objects {
 	public static void main(String[] args) {
 		Cylinder cylinder1 = new Cylinder();
 		System.out.println(cylinder1);
-		System.out.println("cylinder1 area= " + cylinder1.getArea() + ", volume=" + cylinder1.getVolume());
+		System.out.println("cylinder1 area= " + cylinder1.getArea() + ", volume= " + cylinder1.getVolume());
 		Cylinder cylinder2 = new Cylinder(5, 2);
 		System.out.println(cylinder2);
-		System.out.println("cylinder2 area= " + cylinder2.getArea() + ", volume=" + cylinder2.getVolume());
+		System.out.println("cylinder2 area= " + cylinder2.getArea() + ", volume= " + cylinder2.getVolume());
 	}//end main
 }//end Objects
+
 
 package Assignments;
 
@@ -20,19 +21,19 @@ public class Circle {
 	public Circle() {
 		radius = 1.0;
 		this.color = "red";
-		System.out.println("no parameters read in");
+		System.out.println("in default constructor for circle no parameters read in");
 	}//end constructor Circle
 	
 	public Circle(double radius) {
 		this.radius = radius;
 		this.color = "red";
-		System.out.printf("parameter radius %f read in \n", radius);
+		System.out.printf("in constructor for circle parameter radius %f read in \n", radius);
 	}//end constructor Circle
 	
 	public Circle(double radius, String color) {
 		this.radius = radius;
 		this.color = color;
-		System.out.printf("parameter radius %f and color %s read in \n", radius, color);
+		System.out.printf("in constructor for circle parameter radius %f and color %s read in \n", radius, color);
 	}//end constructor Circle
 	
 	public double getArea() {
@@ -72,25 +73,28 @@ public class Cylinder extends Circle{
 		//super explicitly calls the default constructor in circle
 		super();
 		this.height = 1;
-		System.out.println("in default for cylinder");
+		System.out.println("in default constructor for cylinder no parameters read in");
 	}//end constructor Cylinder
 	
 	public Cylinder(double height) {
-		//super explicitly calls the default constructor in circle
-		super();
-		this.height = height;		
+		// without super an implicit call to the default constructor in circle is made		
+		this.height = height;
+		System.out.println("in constructor for cylinder parameter height= " + height + " read in");
 	}//end constructor Cylinder
 	
 	public Cylinder(double height, double radius) {
 		//super explicitly calls the constructor in circle associated with the input parameters
 		super(radius);
 		this.height = height;
+		System.out.println("in constructor for cylinder parameter height= " + height + " and radius= " + radius + " read in");
 	}//end constructor Cylinder
 	
 	public Cylinder(double height, double radius, String color) {
 		//super explicitly calls the constructor in circle associated with the input parameters
 		super(radius, color);
 		this.height = height;
+		System.out.println("in constructor for cylinder parameter height= " + height + " radius= " + radius + " and color= " 
+		+ color + " read in");
 	}//end constructor Cylinder
 	
 	public double getVolume() {
@@ -116,8 +120,16 @@ public class Cylinder extends Circle{
 	//Overrides the toString method in Object
 	@Override
 	public String toString() {
-		return "Cylinder[radius=" + getRadius() + ", height= " + height + ", color=" + getColor() + "]";
+		return "Cylinder[radius= " + getRadius() + ", height= " + height + ", color= " + getColor() + "]";
 	}//end toString
 }//end Cylinder
 
 
+OUTPUT:
+in default constructor for cylinder no parameters read in
+Cylinder[radius= 1.0, height= 1.0, color= red]
+cylinder1 area= 12.566370614359172, volume= 3.141592653589793
+in constructor for circle parameter radius 2.000000 read in 
+in constructor for cylinder parameter height= 5.0 and radius= 2.0 read in
+Cylinder[radius= 2.0, height= 5.0, color= red]
+cylinder2 area= 87.96459430051421, volume= 62.83185307179586

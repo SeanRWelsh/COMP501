@@ -4,12 +4,14 @@ public class Player {
 	private String name;
 	private Card hand[]; 
 	private int wins, cardsInHand;
+	private boolean busted;
 	
 	public Player(String name) {
 		this.name = name;
 		this.hand = new Card[11];
 		this.wins = 0;
 		this.cardsInHand =0;
+		this.busted = false;
 	}//end Player constructor
 	
 	public String getName() {
@@ -19,6 +21,55 @@ public class Player {
 	public Card[] getHand() {
 		return hand;
 	}//end getHand
+	public int getNumberOfCardsInHand() {
+		int numberOfCards = 0;
+		for(Card card:hand) {
+			if(card != null)
+				numberOfCards++;
+		}//end for
+		return numberOfCards;
+		
+	}
+	public void showHand() {
+//		StringBuilder sb = new StringBuilder();
+//		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+//			sb.append(hand[i] );			
+//			if(i+1 != getNumberOfCardsInHand()) {
+//				sb.append(", ");
+//			}else {
+//				sb.append(" ");
+//			}
+//		}//end for
+//		return sb.toString();
+		Card hand[] = getHand();
+		String visualHand[]= {"","","","","","",""};
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			visualHand[0] +="┌───────────────┐  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			String topLeft = String.format("%-2s", hand[i].getValueSymbol());
+			visualHand[1] +="│" + topLeft + "             │  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			visualHand[2]+= "│               │  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			visualHand[3]+= "│       " + hand[i].getSuitSymbol() + "       │  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			visualHand[4]+="│               │  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			String bottomRight = String.format("%2s", hand[i].getValueSymbol());
+			visualHand[5]+="│             " + bottomRight + "│  ";
+		}//end for
+		for(int i=0; i<getNumberOfCardsInHand(); i++) {
+			visualHand[6]+="└───────────────┘  ";
+		}
+        for (String line : visualHand) {
+            System.out.println(line);
+        }
+	}
 	
 	public void setHand(Card card) {
 		hand[cardsInHand] = card;
@@ -38,6 +89,7 @@ public class Player {
 		for(int i = 0; i<hand.length; i++) {
 			hand[i]=null;
 		}//end for
+		busted =false;
 	}//end newGame
 	
 	public int getHandTotal() {
@@ -49,23 +101,23 @@ public class Player {
 		return total;
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name);
-		sb.append("'s hand is ");
-		for(int i=0; i<hand.length; i++) {
-			if(hand[i] != null) {
-				sb.append(hand[i]);
-				if(hand[i+1] != null) {
-					sb.append(", ");
-				}else {
-					break;
-				}//end inner ifelse
-			}//end out if
-		}//end for
-		return sb.toString();
-	}//end toString
+	public boolean isBusted() {
+		return busted;
+	}
+	
+	public void setBusted(boolean busted) {
+		this.busted = busted;
+		
+	}
+	
+//	@Override
+//	public String toString() {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(name);
+//		sb.append("'s hand is ");
+//		sb.append(showHand());
+//		return sb.toString();
+//	}//end toString
 	
 
 }

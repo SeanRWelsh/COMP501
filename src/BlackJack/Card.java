@@ -1,15 +1,17 @@
 package BlackJack;
 
 public class Card {
-	private String suit, name;
+	private String suit, suitSymbol, valueSymbol, name;
 	private int value;
 	private boolean inDeck;
 	
-	public Card(String suit, String name, int value) {
+	public Card(String suit, String name, int value, String suitSymbol,String valueSymbol) {
 		this.suit = suit;
 		this.name = name;
 		this.value = value;
 		this.inDeck = true;
+		this.suitSymbol = suitSymbol;
+		this.valueSymbol = valueSymbol;
 	}
 	
 	public String getSuit() {
@@ -31,6 +33,13 @@ public class Card {
 	}
 	public boolean inDeck() {
 		return inDeck;
+	}
+	
+	public String getValueSymbol() {
+		return valueSymbol;
+	}
+	public String getSuitSymbol() {
+		return suitSymbol;
 	}
 	
 	@Override
