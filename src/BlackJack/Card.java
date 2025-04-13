@@ -12,37 +12,37 @@ public class Card {
 		this.inDeck = true;
 		this.suitSymbol = suitSymbol;
 		this.valueSymbol = valueSymbol;
-	}//end constructor
+	}// end constructor
 
 	public String getSuit() {
 		return suit;
-	}//end getSuit
+	}// end getSuit
 
 	public String getName() {
 		return name;
-	}//end getName
+	}// end getName
 
 	public int getValue() {
 		return value;
-	}//end getValue
+	}// end getValue
 
 	public void setInDeck(boolean inDeck) {
 		this.inDeck = inDeck;
-	}//end setInDeck
+	}// end setInDeck
 
 	public boolean isInDeck() {
 		return inDeck;
-	}//end isInDeck
+	}// end isInDeck
 
 	public String getValueSymbol() {
 		return valueSymbol;
-	}//end getValueSymbol
+	}// end getValueSymbol
 
 	public String getSuitSymbol() {
 		return suitSymbol;
-	}//end getSuitSymbol
+	}// end getSuitSymbol
 
 	public void setValue(int value) {
 		this.value = value;
-	}//end setValue
+	}// end setValue
 }

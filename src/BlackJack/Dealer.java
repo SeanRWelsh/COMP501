@@ -3,9 +3,10 @@ package BlackJack;
 public class Dealer extends Player {
 	public Dealer() {
 		super("dealer");
-	}//end constructor
+	}// end constructor
 
-	//Sets up and ascii representation of the dealers hand. Hides one card from being displayed
+	// Sets up and ascii representation of the dealers hand. Hides one card from
+	// being displayed
 	public void showHand() {
 		Card hand[] = getHand();
 		String visualHand[] = { "", "", "", "", "", "", "" };
@@ -18,7 +19,7 @@ public class Dealer extends Player {
 				visualHand[1] += "│ " + "              │  ";
 			} else {
 				visualHand[1] += "│" + topLeft + "             │  ";
-			}//end if else
+			} // end if else
 		} // end for
 
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
@@ -30,7 +31,7 @@ public class Dealer extends Player {
 				visualHand[3] += "│        " + "       │  ";
 			} else {
 				visualHand[3] += "│       " + hand[i].getSuitSymbol() + "       │  ";
-			}//end if else
+			} // end if else
 		} // end for
 
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
@@ -43,7 +44,7 @@ public class Dealer extends Player {
 				visualHand[5] += "│ " + "              │  ";
 			} else {
 				visualHand[5] += "│             " + bottomRight + "│  ";
-			}//end if else
+			} // end if else
 		} // end for
 
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
@@ -52,11 +53,12 @@ public class Dealer extends Player {
 
 		for (String line : visualHand) {
 			System.out.println(line);
-		}//end for
-	}//end showHand
+		} // end for
+	}// end showHand
 
-	//calls super classes showHand in order to show dealers full hand when applicable
+	// calls super classes showHand in order to show dealers full hand when
+	// applicable
 	public void showFullHand() {
 		super.showHand();
-	}//end showFullHand
-}//end Dealer
+	}// end showFullHand
+}// end Dealer
