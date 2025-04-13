@@ -23,45 +23,47 @@ public class Player {
 	}// end getHand
 
 	public int getNumberOfCardsInHand() {
-		int numberOfCards = 0;
-		for (Card card : hand) {
-			if (card != null)
-				numberOfCards++;
-		} // end for
-		return numberOfCards;
-
+		return cardsInHand;
 	}// end getNumberOfCardsInHand
 
+	// Sets up and ascii representation of the players hand
 	public void showHand() {
 		Card hand[] = getHand();
 		String visualHand[] = { "", "", "", "", "", "", "" };
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			visualHand[0] += "┌───────────────┐  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			String topLeft = String.format("%-2s", hand[i].getValueSymbol());
 			visualHand[1] += "│" + topLeft + "             │  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			visualHand[2] += "│               │  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			visualHand[3] += "│       " + hand[i].getSuitSymbol() + "       │  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			visualHand[4] += "│               │  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			String bottomRight = String.format("%2s", hand[i].getValueSymbol());
 			visualHand[5] += "│             " + bottomRight + "│  ";
 		} // end for
+
 		for (int i = 0; i < getNumberOfCardsInHand(); i++) {
 			visualHand[6] += "└───────────────┘  ";
-		}
+		} // end for
+
 		for (String line : visualHand) {
 			System.out.println(line);
-		}
-	}
+		} // end for
+	}// end showHand
 
 	public void setHand(Card card) {
 		hand[cardsInHand] = card;
@@ -72,35 +74,33 @@ public class Player {
 		return wins;
 	}// end getWins
 
-	public void setWins() {
+	public void addAWin() {
 		wins++;
-	}// end setWins
+	}// end addAWin
 
+	// Resets player stats cardsInHand, hand, and busted
 	public void newGame() {
-		cardsInHand = 0;
-		for (int i = 0; i < hand.length; i++) {
+		for (int i = 0; i < cardsInHand; i++) {
 			hand[i] = null;
 		} // end for
+		cardsInHand = 0;
 		busted = false;
 	}// end newGame
 
 	public int getHandTotal() {
 		int total = 0;
-		for (int i = 0; i < hand.length; i++) {
+		for (int i = 0; i < cardsInHand; i++) {
 			if (hand[i] != null)
 				total += hand[i].getValue();
-			if (hand[i + 1] == null)
-				break;
-		}
+		} // end for
 		return total;
-	}
+	}// end getHandTotal
 
 	public boolean isBusted() {
 		return busted;
-	}
+	}// end isBusted
 
 	public void setBusted(boolean busted) {
 		this.busted = busted;
-
-	}
-}
+	}// end setBusted
+}// end Player

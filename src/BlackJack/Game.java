@@ -139,7 +139,7 @@ public class Game {
 				if (players[i].isBusted()) {
 					System.out.println(players[i].getName() + " also busted...better luck next time ");
 				} else {
-					players[i].setWins();
+					players[i].addAWin();
 					System.out.println(players[i].getName() + " Won!!");
 				}
 			}
@@ -149,7 +149,7 @@ public class Game {
 					System.out.println(players[i].getName() + " busted better luck next time ");
 
 				} else if (players[i].getHandTotal() > players[dealer].getHandTotal()) {
-					players[i].setWins();
+					players[i].addAWin();
 					System.out.println(players[i].getName() + " Won!! with ");
 					players[i].showHand();
 					System.out.println(" beating the dealer by " +
