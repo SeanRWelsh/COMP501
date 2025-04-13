@@ -3,7 +3,7 @@ package BlackJack;
 public class Player {
 	private String name;
 	private Card hand[];
-	private int wins, cardsInHand;
+	private int wins, cardsInHand, money, wager;
 	private boolean busted;
 
 	public Player(String name) {
@@ -12,6 +12,8 @@ public class Player {
 		this.wins = 0;
 		this.cardsInHand = 0;
 		this.busted = false;
+		this.money = 5;
+		this.wager = 0;
 	}// end Player constructor
 
 	public String getName() {
@@ -85,6 +87,7 @@ public class Player {
 		} // end for
 		cardsInHand = 0;
 		busted = false;
+		wager = 0;
 	}// end newGame
 
 	public int getHandTotal() {
@@ -99,6 +102,26 @@ public class Player {
 	public boolean isBusted() {
 		return busted;
 	}// end isBusted
+
+	public void addWinningBid() {
+		money += wager;
+	}
+
+	public void removeLosingBid() {
+		money -= wager;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public int getWager() {
+		return wager;
+	}
+
+	public void setWager(int wager) {
+		this.wager = wager;
+	}
 
 	public void setBusted(boolean busted) {
 		this.busted = busted;

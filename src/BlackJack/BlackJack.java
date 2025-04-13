@@ -17,9 +17,9 @@ public class BlackJack {
 		Scanner getData = new Scanner(System.in);
 		Player players[];
 		Game playGame;
-		boolean playAgain = true;
 
 		System.out.println("Welcome to blackJack!!");
+		System.out.println("Each player starts with $5");
 
 		// Get amount of players
 		while (true) {
@@ -49,13 +49,7 @@ public class BlackJack {
 
 		// continue to play blackjack until the user decides they are finished
 		playGame = new Game(players);
-		while (playAgain) {
-			playGame.deal();
-			playGame.printDeal(getData);
-			playGame.playRound(getData);
-			playGame.announceWinners();
-			playAgain = playGame.playAgain(getData);
-		} // end while
+		playGame.playGame(getData);
 
 		// once user is done playing print out end of game messages and clean up scanner
 		System.out.println("Final win tally");

@@ -4,30 +4,111 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
-	private Player players[];
-	private Deck deck = new Deck();;
+	private Player players[], activePlayers[];
+	private Player dealer = new Dealer();
+	private Deck deck = new Deck();
 
 	public Game(Player[] players) {
-		this.players = new Player[players.length + 1];
+		this.players = new Player[players.length];
 		int i = 0;
 		for (i = 0; i < players.length; i++) {
 			this.players[i] = players[i];
 		} // end for
-		this.players[i] = new Dealer();
 	}// end Game constructor
 
+	public void playGame(Scanner getData) {
+		boolean playAgain = true;
+		while (playAgain) {
+			setActivePlayers();
+			bid(getData);
+			deal();
+			printDeal(getData);
+			playRound(getData);
+			announceWinners();
+			playAgain = playAgain(getData);
+		} // end while
+	}
+
+	private void setActivePlayers() {
+		int playerCount = 0;
+		for (int i = 0; i < players.length; i++) {
+			if (players[i].getMoney() > 0)
+				playerCount++;
+		} // end for
+		activePlayers = new Player[playerCount + 1];
+		playerCount = 0;
+		for (int i = 0; i < players.length; i++) {
+			if (players[i].getMoney() > 0) {
+				activePlayers[playerCount] = players[i];
+				playerCount++;
+			} else {
+				System.out.println(
+						"Sorry " + players[i].getName() + " your funds are at $0 please feel free to stay and watch ");
+			} // end if else
+		} // end for
+		if (playerCount == 0) {
+			System.out.println(
+					"Sorry no one has any money to play with. Thanks for playing blackjack and better luck next time!");
+			System.exit(1);
+		}
+		activePlayers[playerCount] = dealer;
+
+	}// end setActivePlayers
+
+	private void bid(Scanner getData) {
+		for (Player player : activePlayers) {
+			if (player.getName() != "dealer") {
+				while (true) {
+					int wager;
+					try {
+						System.out.println(player.getName() + " you currently have $" + player.getMoney()
+								+ " what would you like to wager? ");
+
+						wager = getData.nextInt();
+						if (wager <= player.getMoney() && wager > 0) {
+							player.setWager(wager);
+							break;
+						} else {
+							throw new InputMismatchException();
+						} // end if else
+					} catch (InputMismatchException e) {
+						System.out.println("Invalid input please enter a number between 1 and " + player.getMoney());
+						getData.nextLine();
+						continue;
+					} // end try catch
+				} // end if
+			} // end for
+
+		} // end while
+	}// end scanner
+
 	// deals 2 cards to every player including the dealer
-	public void deal() {
+	private void deal() {
 		for (int i = 0; i < 2; i++) {
-			for (Player player : players) {
+			for (Player player : activePlayers) {
 				player.setHand(deck.dealCard());
 			} // end inner for
 		} // end outer for
 	}// end deal
 
+	// prints every players name and hand. Prints dealers cards but hides one
+	private void printDeal(Scanner getData) {
+		for (Player player : activePlayers) {
+			Card card[] = player.getHand();
+			System.out.println(player.getName());
+			player.showHand();
+			if (player.getName() == "dealer")
+				break;
+			for (int i = 0; i < player.getNumberOfCardsInHand(); i++) {
+				if (card[i].getName() == "Ace")
+					setAceValue(getData, card[i]);
+			} // end inner for
+		} // end outer for
+	}// end printDeal
+
 	// lets every player take there turn and then the dealer takes there turn
-	public void playRound(Scanner getData) {
-		for (Player player : players) {
+	private void playRound(Scanner getData) {
+		for (Player player : activePlayers) {
 			if (player.getName() != "dealer") {
 				playerTurn(player, getData);
 			} else {
@@ -36,11 +117,76 @@ public class Game {
 		} // end player loop
 	}// end play round
 
+	// determine who won. If a player won add a win to there tally
+	private void announceWinners() {
+		int dealer = activePlayers.length - 1;
+
+		// condition 1. dealer dealt 21 everyone losses
+		if (activePlayers[dealer].getHandTotal() == 21 &&
+				activePlayers[dealer].getNumberOfCardsInHand() <= 2) {
+			System.out.println("Dealer wins  with ");
+			((Dealer) activePlayers[dealer]).showFullHand();
+			for (Player player : activePlayers) {
+				if (player.getName() != "dealer") {
+					player.removeLosingBid();
+				}
+			}
+
+			// condition 2 dealer busted Everyone that did not bust won
+		} else if (activePlayers[dealer].isBusted()) {
+			System.out.println("Dealer busted!!!!! ");
+			for (int i = 0; i < dealer; i++) {
+				if (activePlayers[i].isBusted()) {
+					System.out.println(activePlayers[i].getName() + " also busted...better luck next time ");
+					activePlayers[i].removeLosingBid();
+				} else {
+					activePlayers[i].addAWin();
+					System.out.println(activePlayers[i].getName() + " Won!!");
+					activePlayers[i].addWinningBid();
+				} // end if else
+			}
+		} else {
+			for (int i = 0; i < dealer; i++) {
+
+				// condition 3 player busted auto loss
+				if (activePlayers[i].isBusted()) {
+					System.out.println(activePlayers[i].getName() + " busted better luck next time ");
+					activePlayers[i].removeLosingBid();
+
+					// condition 4 player hand total greater than dealer. player wins
+				} else if (activePlayers[i].getHandTotal() > activePlayers[dealer].getHandTotal()) {
+					activePlayers[i].addAWin();
+					System.out.println(activePlayers[i].getName() + " Won!! with ");
+					activePlayers[i].showHand();
+					System.out.println(" beating the dealer by " +
+							(activePlayers[i].getHandTotal() - activePlayers[dealer].getHandTotal()));
+					activePlayers[i].addWinningBid();
+
+					// condition 5 player and dealer tie. Player lost
+				} else if (activePlayers[i].getHandTotal() == activePlayers[dealer].getHandTotal()) {
+					System.out.println(activePlayers[i].getName() + " tied with ");
+					activePlayers[i].showHand();
+					System.out.println(" dealer had ");
+					((Dealer) activePlayers[dealer]).showFullHand();
+					activePlayers[i].removeLosingBid();
+
+					// condition 6 players hand is less than dealers. player lost
+				} else {
+					System.out.println(activePlayers[i].getName() + " lost with ");
+					activePlayers[i].showHand();
+					System.out.println(" losing to the dealer by " +
+							(activePlayers[dealer].getHandTotal() - activePlayers[i].getHandTotal()));
+					activePlayers[i].removeLosingBid();
+				} // end if else
+			} // end player for loop
+		} // end if else
+	}// end announce winners
+
 	// gets input from the players if they want to play again. If they do reset
 	// everything for the next round
 	// and pass back true to the calling item. If the player wishes to exit return
 	// false to the calling item.
-	public boolean playAgain(Scanner getData) {
+	private boolean playAgain(Scanner getData) {
 		while (true) {
 			String playAgain;
 			System.out.println("Play again?[Y/N]");
@@ -64,7 +210,7 @@ public class Game {
 	// reset all deck and player data for a fresh start
 	private void nextRound() {
 		deck.shuffle();
-		for (Player player : players) {
+		for (Player player : activePlayers) {
 			player.newGame();
 		} // end player for loop
 	}// end next round
@@ -149,73 +295,4 @@ public class Game {
 			} // end try catch
 		} // end while
 	}// end setAceValue
-
-	// determine who won. If a player won add a win to there tally
-	public void announceWinners() {
-		int dealer = players.length - 1;
-
-		// condition 1. dealer dealt 21 everyone losses
-		if (players[dealer].getHandTotal() == 21 &&
-				players[dealer].getNumberOfCardsInHand() <= 2) {
-			System.out.println("Dealer wins  with ");
-			((Dealer) players[dealer]).showFullHand();
-
-			// condition 2 dealer busted Everyone that did not bust won
-		} else if (players[dealer].isBusted()) {
-			System.out.println("Dealer busted!!!!! ");
-			for (int i = 0; i < dealer; i++) {
-				if (players[i].isBusted()) {
-					System.out.println(players[i].getName() + " also busted...better luck next time ");
-				} else {
-					players[i].addAWin();
-					System.out.println(players[i].getName() + " Won!!");
-				} // end if else
-			}
-		} else {
-			for (int i = 0; i < dealer; i++) {
-
-				// condition 3 player busted auto loss
-				if (players[i].isBusted()) {
-					System.out.println(players[i].getName() + " busted better luck next time ");
-
-					// condition 4 player hand total greater than dealer. player wins
-				} else if (players[i].getHandTotal() > players[dealer].getHandTotal()) {
-					players[i].addAWin();
-					System.out.println(players[i].getName() + " Won!! with ");
-					players[i].showHand();
-					System.out.println(" beating the dealer by " +
-							(players[i].getHandTotal() - players[dealer].getHandTotal()));
-
-					// condition 5 player and dealer tie. Player does not get a win tally
-				} else if (players[i].getHandTotal() == players[dealer].getHandTotal()) {
-					System.out.println(players[i].getName() + " tied with ");
-					players[i].showHand();
-					System.out.println(" dealer had ");
-					((Dealer) players[dealer]).showFullHand();
-
-					// condition 6 players hand is less than dealers. player lost
-				} else {
-					System.out.println(players[i].getName() + " lost with ");
-					players[i].showHand();
-					System.out.println(" losing to the dealer by " +
-							(players[dealer].getHandTotal() - players[i].getHandTotal()));
-				} // end if else
-			} // end player for loop
-		} // end if else
-	}// end announce winners
-
-	// prints every players name and hand. Prints dealers cards but hides one
-	public void printDeal(Scanner getData) {
-		for (Player player : players) {
-			Card card[] = player.getHand();
-			System.out.println(player.getName());
-			player.showHand();
-			if (player.getName() == "dealer")
-				break;
-			for (int i = 0; i < player.getNumberOfCardsInHand(); i++) {
-				if (card[i].getName() == "Ace")
-					setAceValue(getData, card[i]);
-			} // end inner for
-		} // end outer for
-	}// end print players hand
 }// end game
