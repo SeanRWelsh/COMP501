@@ -5,12 +5,15 @@ import java.security.SecureRandom;
 public class Deck {
 	private Card[] cards = new Card[52];
 
+	// Constructor for Deck. Creates a standard 52 card deck by individually
+	// creating each card object and storing each card in an array
 	public Deck() {
 		int counter = 0;
 		while (counter < 52) {
 			for (int j = 2; j < 15; j++) {
 				String suit, name = "", suitSymbol = "", valueSymbol = "";
 				int value = j;
+				// Set up for cards name value symbol and value
 				switch (j) {
 					case (2):
 						name = "Two";
@@ -69,6 +72,8 @@ public class Deck {
 						valueSymbol = "A";
 						break;
 				}// end switch
+
+				// set up for cards suit
 				if (counter < 13) {
 					suit = "Hearts";
 					suitSymbol = "♥";
@@ -82,38 +87,32 @@ public class Deck {
 					suit = "Clubs";
 					suitSymbol = "♣";
 				}
+				// create a new card object and place in array
 				cards[counter] = new Card(suit, name, value, suitSymbol, valueSymbol);
 				counter++;
 			} // end for
 		} // end while
-
 	}// end default constructor
 
+	// Use secureRandom to randomly choose a card from the deck. If card has already
+	// been dealt generate another random number and check again
+	// once a random card still in the deck is found set card to no longer in deck
+	// and pass the card to whatever called it
 	public Card dealCard() {
 		SecureRandom randomNumberGenerator = new SecureRandom();
 		int randomNumber = randomNumberGenerator.nextInt(52);
 		while (!cards[randomNumber].isInDeck()) {
 			randomNumber = randomNumberGenerator.nextInt(52);
-		}
+		} // end while
+
 		cards[randomNumber].setInDeck(false);
 		return cards[randomNumber];
-	}
+	}// end dealCard
 
+	// Iterates through each card and resets its inDeck value back to true
 	public void shuffle() {
 		for (Card card : cards) {
 			card.setInDeck(true);
-		}
-
+		} // end for
 	}// end shuffle
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < 52; i++) {
-			sb.append(cards[i].toString());
-			sb.append(cards[i].isInDeck());
-			sb.append("\n");
-		}
-		return sb.toString();
-	}// end toString
 }// end Deck
