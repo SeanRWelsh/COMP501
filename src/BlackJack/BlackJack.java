@@ -3,8 +3,22 @@
  *Assignment BlackJack 
  *This Program allows up to 4 players to play blackJack against a dealer
  *BlackJack class contains Main and drives the program
- *Game handles all Game logic
- *Player handles
+ *
+ *Card(String suit, suitSymbol, valueSymbol, name
+ *	int value
+ *	boolean inDeck)
+ *
+ *Dealer is a sub class of player in order to have alternate functionality for showing the dealers hand
+ *
+ *Deck(Card[] cards)
+ *Game class handles all Game logic(Player[] players, activePlayers,
+ *	Player dealer
+ *	Deck deck
+ *
+ *Player handles all player logic(String name, 
+ *	Card[] hand, 
+ *	int wins, cardsInHand, money, wager, 
+ *	boolean busted)
  */
 package BlackJack;
 
@@ -54,8 +68,10 @@ public class BlackJack {
 		// once user is done playing print out end of game messages and clean up scanner
 		System.out.println("Final win tally");
 		for (int i = 0; i < players.length; i++) {
+			String plural = players[i].getWins() == 1 ? "" : "'s";
 			System.out.println(players[i].getName() + " Won a total of " +
-					players[i].getWins());
+					players[i].getWins() + " time" + plural + " and is walking away with a total of $"
+					+ players[i].getMoney());
 		} // end for
 		System.out.println("Thanks for Playing blackjack!");
 		getData.close();

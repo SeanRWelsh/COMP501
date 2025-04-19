@@ -14,6 +14,7 @@ public class Card {
 		this.valueSymbol = valueSymbol;
 	}// end constructor
 
+	// getters and setters for a Card
 	public String getSuit() {
 		return suit;
 	}// end getSuit

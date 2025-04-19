@@ -16,6 +16,9 @@ public class Game {
 		} // end for
 	}// end Game constructor
 
+	// while playAgain = true will continue to loop through the game logic. Each
+	// loop is 1 round of
+	// the game
 	public void playGame(Scanner getData) {
 		boolean playAgain = true;
 		while (playAgain) {
@@ -29,6 +32,11 @@ public class Game {
 		} // end while
 	}
 
+	// Active players sets up the players who are actually playing the round. If a
+	// player does not have
+	// enough money to play a round they will not be added to the active players
+	// list. Finally a Dealer
+	// is added to the player list
 	private void setActivePlayers() {
 		int playerCount = 0;
 		for (int i = 0; i < players.length; i++) {
@@ -55,6 +63,10 @@ public class Game {
 
 	}// end setActivePlayers
 
+	// loops through the active players list and asks each player how much they
+	// would like to bid
+	// and makes sure they can only bid between 0 and the amount of money they have
+	// in there account
 	private void bid(Scanner getData) {
 		for (Player player : activePlayers) {
 			if (player.getName() != "dealer") {
